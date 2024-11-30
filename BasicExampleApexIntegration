@@ -1,0 +1,21 @@
+//Basic Apex Integration Class to make a HTTP Callout
+
+Apex Class:
+public class DemoIntegrationApex {
+    public static void makeCllout(){
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+        //Setup->Security->Remote site settings. endpoint = https://global-warming.org/api/temperature-api
+        req.setEndpoint('https://global-warming.org/api/temperature-api');
+        req.setMethod('GET');
+        HttpResponse res = http.send(req);
+        
+        if(res.getStatusCode() == 200){
+            System.debug('Made a callout to External System '+ res.getBody());
+        }
+    }
+}
+
+Execute your class in execute anonymous window (ctrl+E):
+DemoIntegrationApex.makeCllout();
+Then open debug logs to see the response body.
